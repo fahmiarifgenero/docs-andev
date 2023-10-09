@@ -1,0 +1,107 @@
+import { FileTree } from "nextra/components";
+
+# Front View
+
+Halaman dashboard home ini dapat di akses dengan URL `/home`. User yang dapat mengakses halaman ini adalah `guest`, `user`, `office` dan `admin`. Struktur folder halaman _front-view_ ini adalah sebagai berikut:
+
+<FileTree>
+  <FileTree.Folder name="resource" defaultOpen>
+    <FileTree.Folder name="views" defaultOpen>
+      <FileTree.Folder name="front-view" defaultOpen>
+        <FileTree.Folder name="layouts" defaultOpen>
+          <FileTree.File name="app.blade.php" />
+          <FileTree.File name="footer.blade.php" />
+          <FileTree.File name="header.blade.php" />
+          <FileTree.File name="master.blade.php" />
+          <FileTree.File name="sidebar.blade.php" />
+        </FileTree.Folder>
+        <FileTree.Folder name="pages">
+          <FileTree.Folder name="...">
+          </FileTree.Folder>
+          <FileTree.File name="blank.blade.php" />
+          <FileTree.File name="docs.blade.php" />
+        </FileTree.Folder>
+        <FileTree.File name="index.blade.php" />
+      </FileTree.Folder>
+    </FileTree.Folder>
+
+  </FileTree.Folder>
+</FileTree>
+
+## Interface
+
+Tampilan awal dari aplikasi ini adalah sebagai berikut:
+
+![Dasboard Home](/images/front-view/layouts/home.png)
+
+Berikut bagian - bagian pada halaman homepage dashboard :
+
+### Bagian Header
+
+Bagian headert terdapat logo, search bar, dan menu informasi.
+
+1. Logo yang digunakan bersifat statis
+2. Search Bar yang digunakan bersifat statis, tidak dapat digunakan untuk mencari data
+3. Menu Informasi menampilkan informasi waktu, icon home, icon tanda tanya, dan icon user
+
+   ![informasi home dashboard](/images/front-view/layouts//informasi-home-dashboard.png)
+
+   Urutan informasi tersebut adalah sebagai berikut:
+
+   1. Angka tersebut menunjukkan jam untuk wilayah Indonesia bagian barat
+   2. Icon home yang akan mengarahkan user ke halaman [portal](/halaman-portal)
+   3. Icon tanda tanya yang akan mengarahkan user ke halaman bantuan
+   4. Icon user yang akan memunculkan menu dropdown yang berisi menu logout dan menu profil
+      - Nama dan email user diambil dari data user yang sedang login
+      - Halaman edit akan mengarahkan user ke halaman edit data
+      - Log out akan mengarahkan user ke halaman [portal](/halaman-portal)
+
+### Bagian Navigation
+
+![Navbar dashboard](/images/front-view/layouts/navbar.png)
+
+Navigasi untuk mengarahkan user ke halaman - halaman yang ada pada aplikasi ini.
+
+### Bagian Content
+
+![Body Content](/images/front-view/layouts/content.png)
+
+Bagian kiri atas terdapat judul atau yang biasa disebut breadcrumb. Breadcrumb ini menunjukkan posisi user pada aplikasi ini. Breadcrumb ini bersifat statis. Pada bagian tengah terdapat grafik yang besar. Grafik ini menampilkan kesimpulan data yang ada pada database.
+
+Grafik menggunakan [echart](https://echarts.apache.org/en/index.html) dan menggunakan common js, berikut contoh penggunakan grafik pada halaman `home`
+
+```blade filename="resource/views/home.blade.php"
+@push('head-script')
+  <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+@endpush
+```
+
+```html filename="resource/views/home.blade.php"
+<div id="output-analisa" class="d-flex "></div>
+```
+
+```blade filename="resource/views/home.blade.php"
+<script type="text/javascript" src="{{ asset('js/diagram/output-andev-1.js') }}">
+</script>
+```
+
+```js filename="public/js/diagram/output-andev-1.js"
+var myChart = echarts.init(document.getElementById("output-analisa"), null, {
+  width: 1200,
+  height: 400,
+});
+
+var option = {
+  // all option here
+};
+myChart.setOption(option);
+```
+
+import { Callout } from "nextra/components";
+
+Garifk menampilkan 5 data yaitu :
+
+1. Output analisa
+2. Output riset dan validasi
+3. Output dokumen
+4. Complience and Performance instrument

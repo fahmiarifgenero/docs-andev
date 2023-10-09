@@ -1,5 +1,48 @@
 {
   "index": {
     "title": "Introduction"
-  }
+  },
+  "-": {
+    "type": "separator",
+    "title": "Services"
+  },
+  "authentication": {
+    "title": "Authentication"
+  },
+  "--": {
+    "type": "separator",
+    "title": "Layouts"
+  },
+  "layout-front-end": {
+    "title": "Layout Front End"
+  },
+  "layout-back-end": {
+    "title": "Layout Back End"
+  },
+  "---": {
+    "type": "separator",
+    "title": "Front View"
+  },
+  "front-view-home": "Home",
+  "front-view-development-journey": "Development Journey",
+  "front-view-rpv-riv": "RPV & RIV",
+  "front-view-report-analysis": "Report Analysis",
+  "front-view-lembar-kerja-analis": "Lembar Kerja Analis",
+  "front-view-jadwal-stabilita": "Jadwal Stabilita",
+  "----": {
+    "type": "separator",
+    "title": "Back View"
+  },
+  "rear-view-home": "Home",
+  "rear-view-development-journey": "Development Journey",
+  "rear-view-rpv-riv": "RPV & RIV",
+  "rear-view-report-analysis": "Report Analysis",
+  "rear-view-lembar-kerja-analis": "Lembar Kerja Analis",
+  "rear-view-jadwal-stabilita": "Jadwal Stabilita",
+  "-----": {
+    "type": "separator",
+    "title": "Other"
+  },
+  "compliance": "Compliance",
+  "instrument-status": "Instrument Status"
 }

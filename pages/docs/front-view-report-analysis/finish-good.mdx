@@ -1,0 +1,138 @@
+# Report Analysis - Finish good
+
+import { Callout } from "nextra/components";
+import { Tabs, Tab } from "nextra/components";
+
+## Deskripsi
+
+Halaman ini berisi laporan dari hasil analisis yang telah dilakukan oleh tim
+
+## User Level Akses
+
+Detail role level akses dapat dilihat pada tabel berikut :
+
+| Role   | Deskripsi                                                                           | Create | Read | Update | Delete |
+| ------ | ----------------------------------------------------------------------------------- | :----: | :--: | :----: | :----: |
+| Guest  | Tidak mendapatkan fitur CRUD, diharuskan <mark>login</mark> jika ingin melihat data |   ❌   |  ❌  |   ❌   |   ❌   |
+| User   | Dapat menambahkan, melihat dan update data (CRU)                                    |   ✔️   |  ✔️  |   ✔️   |   ❌   |
+| Office | Dapat menambahkan, melihat, update dan delete data (CRUD)                           |   ✔️   |  ✔️  |   ✔️   |   ✔️   |
+| Admin  | Dapat menambahkan, melihat, update dan delete data (CRUD)                           |   ✔️   |  ✔️  |   ✔️   |   ✔️   |
+
+## File Tree
+
+import { FileTree } from "nextra/components";
+
+<FileTree>
+  <FileTree.Folder name="resource" defaultOpen>
+    <FileTree.Folder name="views" defaultOpen>
+      <FileTree.Folder name="front-view" defaultOpen>
+        <FileTree.Folder name="pages" defaultOpen>
+          <FileTree.Folder name="report-analysis" defaultOpen>
+            <FileTree.File name="finish-good.blade.php" />
+          </FileTree.Folder>
+        </FileTree.Folder>
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+## Content
+
+Halaman ini menampilkan tabel yang berisi data dari hasil analisis yang telah dilakukan oleh user,
+
+![Finish Good Report Analysis](/front-view/report-analysis/finish-good-1.png)
+
+![Finish Good Report Analysis](/front-view/report-analysis/finish-good-2.png)
+
+### Header Content
+
+Lihat pada gambar dibawah ini :
+
+![Header Content Report Analysis](/front-view/report-analysis/header-content.png)
+
+Dari 2 gambar tersebut, pada bagian atas terdapat 3 bagian yaitu :
+
+| Item                 | Deskripsi                                                                                                                         |
+| -------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Button `Upload File` | akan mengarahkan ke halaman tambah data yang ada pada [halaman edit](../layout-rear-view)                                         |
+| Filter Bulan         | dimana user dapat memilih bulan yang ingin ditampilkan datanya dan akan query menggunakan parameter bulan yang dipilih            |
+| Filter Tahun         | filter tahun sama seperti pada filter bulan, yaitu menggunakan select box dan akan query menggunakan parameter tahun yang dipilih |
+
+### Body Content
+
+Pada bagian tabel menggunakan library [datatabel](https://datatables.net/) untuk memudahkan pengambilan data, code yang digunakan seperti berikut :
+
+```html filename="resource/views/pages/report-analysis/finish-good.blade.php"
+<table id="example" class="table hover stripe align-midle">
+  <thead>
+    <tr>
+      <th class="text-center">No</th>
+      <th class="text-center">No. Permintaan Analisa</th>
+      <th class="text-center">No. Laporan Analisa</th>
+      <th class="text-center">...</th>
+      <th class="text-center">...</th>
+      <th class="text-center">...</th>
+      <th class="text-center">...</th>
+      <th class="text-center">Status</th>
+      <th class="text-center">Keterangan</th>
+      <th class="text-center">Action</th>
+      <th class="text-center">Timestamps</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="align-middle">1</td>
+      <td class="align-middle">FG.001.A.23</td>
+      <td class="align-middle">J.001.A.23</td>
+      <td class="align-middle">...</td>
+      <td class="align-middle">...</td>
+      <td class="align-middle">...</td>
+      <td class="align-middle">...</td>
+      <td class="align-middle">MS</td>
+      <td class="align-middle">Tidak ada keterangan</td>
+      <td>
+        <a href="#" class="text-decoration-none btn btn-warning btn-sm"><i data-feather="edit" class="text-dark"></i></a>
+        <button class="btn btn-danger btn-sm">
+          <i data-feather="trash" class="text-dark"></i>
+        </button>
+      </td>
+      <td class="align-middle">2 days ago</td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <th>No</th>
+      <th>Nama Item</th>
+    </tr>
+  </tfoot>
+</table>
+```
+
+Dan untuk feature dari datatable ada 5 dan di generate oleh datatable itu sendiri, yaitu : `Copy`, `Print`, `Excel`, `PDF`, `Column Visibility`
+
+## Tipe Data
+
+Detail data column yang digunakan dalam body content sebagai berikut :
+
+| Item                     | Keterangan                                                                                                                                                                                                              |
+| ------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| No                       | Seiring dengan bertambahnya data, number ada pada kolom ini akan bertambah terus, data dimualai dari no 1                                                                                                               |
+| No. Permintaan Analisa   | Pada halaman report analysis, data yang tampil `FG.001.A.23` untuk keterangan lebih lanjut dapat dilihat [disini](#no-permintaan-analisa)                                                                               |
+| No. Laporan Analisa      | Pada halaman report analysis, data yang tampil `J.001.A.23` untuk keterangan lebih lanjut dapat dilihat [disini](#no-laporan-analisa)                                                                                   |
+| Nama Item                | Bisa dalam bentuk <font color="#a476e3"><ins>input</ins></font> dengan string pendek                                                                                                                                    |
+| Kategori                 | Ketegori dalam report analysis ada 3 yaitu `Obat`, `Suplemen` dan `Kosmetik`. Untuk pengisian data bisa dalam bentuk <font color="#a476e3"><ins>checkbox</ins></font>                                                   |
+| PIC                      | PIC adalah Person In Charge yaitu tanggung jawab, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa string pendek                                                                                  |
+| No Bets / No Lot         | Dalam bentuk <font color="#a476e3"><ins>input</ins></font> berupa string pendek                                                                                                                                         |
+| Bulan                    | Dapat menggunakan <font color="#a476e3"><ins>selext box</ins></font> karna data hanya ada `B0`, `B3`, `B6`, `B9`, `B12`, `B18`, `B24` dan `B36` dan diberti tambahan untuk lain-lainnya yaitu input string pendek       |
+| Parameter                | Parameter disini berupa <font color="#a476e3"><ins>multi select</ins></font> dengan pilihan `pemerian`, `pH`, `visko`, `kadar`, `pengawet`, `mikrobiologi`, `BJ`, `disolusi` dan `kadar`                                |
+| Storage                  | Penyimpanan sampel yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>multi select</ins></font> dengan pilihan `S30`, `S4O`, `S50` dan `LE`                                                    |
+| Tanggal masuk            | Tanggal masuk sampel yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)            |
+| Tanggal Estimasi Selesai | Tanggal estimasi selesai sampel yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date) |
+| Tanggal Analisa          | Tanggal analisa sampel yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)          |
+| Tanggal Selesai Analisa  | Tanggal selesai analisa sampel yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date)  |
+| Nama Analis              | Nama analis yang digunakan dalam analisis, dapat menggunakan <font color="#a476e3"><ins>input</ins></font> berupa string pendek                                                                                         |
+| Download File            | Merupakan <font color="#a476e3"><ins>button</ins></font> yang berfungsi untuk mendownload file yang telah diupload oleh `user`, `office` atau `admin`                                                                   |
+| Status                   | Status dari laporan analisis, dapat menggunakan <font color="#a476e3"><ins>check box</ins></font> dengan pilihan `MS`, `TMS` dan `Pendataan`                                                                            |
+| Keterangan               | Berupa text panjang yang dapat menggunakan <font color="#a476e3"><ins>textarea</ins></font>                                                                                                                             |
+| Action                   | Berupa button yang berfungsi untuk mengedit dan menghapus data, selanjutnya akan mengarahkan ke halaman edit                                                                                                            |
+| Timestamps               | Berupa tanggal dan waktu ketika data terakhir kali di update                                                                                                                                                            |
