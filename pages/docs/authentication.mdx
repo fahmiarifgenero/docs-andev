@@ -1,20 +1,14 @@
 import { Callout, FileTree } from "nextra/components";
 
-<Callout type="warning" emoji="⚠️">
-  This page still work in progress
-</Callout>
+# Authentication
 
-# Login / Register System
-
-## File View
+## Structure folder
 
 <FileTree>
   <FileTree.Folder name="resources" defaultOpen>
     <FileTree.Folder name="views" defaultOpen>
       <FileTree.Folder name="auth" defaultOpen>
         <FileTree.File name="login.blade.php" />
-        <FileTree.File name="register.blade.php" />
-        <FileTree.File name="verify.blade.php" />
         <FileTree.Folder name="password" defaultOpen>
           <FileTree.File name="confirm.blade.php" />
           <FileTree.File name="email.blade.php" />
@@ -25,42 +19,21 @@ import { Callout, FileTree } from "nextra/components";
   </FileTree.Folder>
 </FileTree>
 
-## Halaman Register
-
-Halaman Register / Login didapatkan dari Laravel UI pada saat instalasi project menggunakan Auth Scaffolding `php artisan ui bootstrap --auth`. Dan untuk list user ada pada URL `/users`.
-
-![Register Page](/register-page.png)
-
-## Flow Register User
-
-Flow registrasi akun pada aplikasi ini adalah sebagai berikut:
-
-1. User melakukan registrasi pada URL `/register`.
-2. User memasukkan nama, email, password dan confirm password.
-3. User melakukan submit form.
-4. Setelah itu user menunggu hingga diberi akses oleh admin.
-
 ## System Authentication
 
 Sistem autentikasi yang digunakan cukup sederhana, yaitu menggunakan `Auth::routes()` yang disediakan oleh Laravel. Untuk mengakses halaman `/dashboard` harus login terlebih dahulu. Jika belum login maka akan diarahkan ke halaman login. Jika sudah login maka akan diarahkan ke halaman `/dashboard`.
-Aplikasi ini tidak menggunakan faktor 2FA ataupun fitur lupa password. <mark>Jika user lupa password maka harus menghubungi admin untuk mereset akun</mark>
+Password yang dienkripsi secara sederhana dengan menggunakan `md5` agar jika terjadi lupa password pada user dapat dibuka dari database, karena aplikasi berjalan pada server lokal, aplikasi ini tidak menggunakan faktor 2FA ataupun fitur lupa password. <mark>Jika user lupa password maka harus menghubungi admin untuk mereset akun</mark>
 
 Secara default validasi user yang berhasil registrasi dapat mengakses halaman `/registered`. Berikut database `user` di dalam `users`.
 
 ![Database User](/images/database/database-user.png)
 
-Perlu adanya penambahan column untuk menentukan level user. Level user yang dibutuhkan pada aplikasi ini ada 4 level, diantaranya :
+## Account authentication
 
-- Admin (Super Admin)
-- Office (Admin)
-- User (User)
-- Guest (Guest)
+User tidak dapat melakukan registrasi secara langsung, user harus menghubungi admin untuk melakukan registrasi.
+List data akun yang dibutuhkan untuk registrasi adalah sebagai berikut:
 
-## Authorization
-
-<Callout type="info">Authorization dibuat dengan checkbox, admin dapat menentukan level user dan mendelete users</Callout>
-
-Halaman authorization <mark>belum dibuat</mark> dan <mark>belum diimplementasikan</mark>. URL untuk mengakses halaman authorization hanya `admin` oleh karena itu hanya ada 1 admin yang dapat mengakses halaman tersebut. Untuk mengakses halaman authorization dapat menggunakan URL `/admin`. Jika user yang mengakses halaman tersebut bukan admin maka akan diarahkan ke halaman `/dashboard`.
-Halaman authorization dibuat dengan sederhana, cukup dengan `checkbox` untuk menentukan level user. Admin dapat menambahkan user baru dengan level `user` dan `guest`. Admin juga dapat menghapus user yang sudah terdaftar.
-
-List user yang sudah terdaftar dapat dilihat pada URL `/users`.
+- Nama
+- NIK (Nomor Induk Karyawan)
+- email
+- password

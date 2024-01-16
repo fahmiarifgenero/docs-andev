@@ -1,0 +1,50 @@
+import { Callout, FileTree } from "nextra/components";
+
+# Authorization
+
+## File View
+
+<FileTree>
+  <FileTree.Folder name="resources" defaultOpen>
+    <FileTree.Folder name="views" defaultOpen>
+      <FileTree.Folder name="auth" defaultOpen>
+        <FileTree.File name="login.blade.php" />
+        <FileTree.Folder name="password" defaultOpen>
+          <FileTree.File name="confirm.blade.php" />
+          <FileTree.File name="email.blade.php" />
+          <FileTree.File name="reset.blade.php" />
+        </FileTree.Folder>
+      </FileTree.Folder>
+    </FileTree.Folder>
+  </FileTree.Folder>
+</FileTree>
+
+## Role user
+
+Role user yang dibutuhkan pada aplikasi ini ada 4 role, diantaranya :
+
+- [Admin](#admin) (Super Admin)
+- [Office](#office) (Admin)
+- [Analis](#analis) (User)
+- [Guest](#guest) (Guest)
+
+### Admin
+
+<Callout type="info" emoji="⚠️">
+  Email yang digunakan adalah `admin@admin.com` dan passwordnya adalah password
+</Callout>
+Admin dapat mengakses semua halaman yang ada pada aplikasi ini. Admin dapat menambahkan user baru dengan level `user` dan `guest`. Admin juga dapat menghapus
+user yang sudah terdaftar. Admin juga dapat menghapus semua data yang ada pada aplikasi ini. Untuk user yang sudah terdaftar dapat dilihat pada URL `/users`
+dan untuk konfirmasi role user yang sudah terdaftar dapat dilihat pada URL `/role`.
+
+### Office
+
+Role office memiliki kesamaan dengan Admin yang membedakan ialah tidak dapat menambahkan user baru dengan level `analis` dan `guest`. Office dapat menghapus semua data yang ada pada aplikasi ini.
+
+### Analis
+
+Role user memiliki keterbatasan delete semua data pada aplikasi ini.
+
+### Guest
+
+Role guest hanya dapat mengakses halaman `home` dan `about` saja. Untuk dapat masuk sebagai guest akan ada button saat muncul page login.

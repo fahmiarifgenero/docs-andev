@@ -9,6 +9,9 @@
   "authentication": {
     "title": "Authentication"
   },
+  "authorization": {
+    "title": "Authorization"
+  },
   "--": {
     "type": "separator",
     "title": "Layouts"
@@ -17,11 +20,11 @@
     "title": "Layout Front End"
   },
   "layout-back-end": {
-    "title": "Layout Back End"
+    "title": "Layout Halaman Edit"
   },
   "---": {
     "type": "separator",
-    "title": "Front View"
+    "title": "Halaman Dashboard"
   },
   "front-view-home": "Home",
   "front-view-development-journey": "Development Journey",
@@ -31,7 +34,7 @@
   "front-view-jadwal-stabilita": "Jadwal Stabilita",
   "----": {
     "type": "separator",
-    "title": "Back View"
+    "title": "Halaman Edit"
   },
   "rear-view-home": "Home",
   "rear-view-development-journey": "Development Journey",
